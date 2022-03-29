@@ -5,3 +5,7 @@ export default interface User {
   level: number;
   password: string;
 }
+
+export interface UserApiResponse {
+  token: string,
+}
