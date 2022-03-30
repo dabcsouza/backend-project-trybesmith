@@ -14,9 +14,11 @@ export default class LoginController {
     if (!users
       .some((user) => (user.username === username && user.password === password))) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ error: 'Username or password invalid' });
-    }
+    } 
+    const userData = users.find((e) => e.username === username);
+    delete userData?.password;
     const token = Jwt.sign(
-      { data: { username } },
+      { data: userData },
       jwtSecret,
       {
         expiresIn: '7d',
