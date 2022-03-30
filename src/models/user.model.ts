@@ -8,6 +8,13 @@ export default class UserModel {
     this.connection = connection;
   }
 
+  public getAll = async (): Promise<User[]> => {
+    const response = await this.connection
+      .execute('SELECT id, username, classe, level, password FROM Trybesmith.Users');
+    const [rows] = response;
+    return rows as User[];
+  };
+
   public create = async (user: User): Promise<UserApiResponse> => {
     const { username, classe, level, password } = user;
     const result = await this.connection.execute<ResultSetHeader>(

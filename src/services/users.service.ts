@@ -8,6 +8,11 @@ export default class ProductService {
   constructor() {
     this.model = new UserModel(connection);
   }
+  
+  public getAll = async (): Promise<User[]> => {
+    const Users = await this.model.getAll();
+    return Users;
+  };
 
   public create = async (user: User): Promise<UserApiResponse> => this
     .model.create(user);
